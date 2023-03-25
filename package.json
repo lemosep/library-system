@@ -1,0 +1,24 @@
+{
+  "name": "edu-s_library",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EduLemos0/Edu-s_Library.git"
+  },
+  "author": "EduLemos0",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/EduLemos0/Edu-s_Library/issues"
+  },
+  "homepage": "https://github.com/EduLemos0/Edu-s_Library#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.22",
+    "prisma": "^4.11.0"
+  }
+}

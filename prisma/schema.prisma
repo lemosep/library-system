@@ -10,39 +10,42 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-//User 
+//User Model
 model User {
-  id        Int         @id @default(autoincrement())
-  name      String      @db.VarChar(255)
-  email     String      @unique
-  User_Book User_Book[]
+  id Int @id @default(autoincrement())
+  name String
+  email String
+  user_book User_Book[]
 
-  @@map("users")
+  @@map("user")
 }
 
-//Book
+//Book model
 model Book {
-  id        Int         @id @default(autoincrement())
-  name      String      @db.VarChar(255)
-  author    String?
-  pages     Int
-  User_Book User_Book[]
+  id Int @id @default(autoincrement())
+  name String
+  author String?
+  pages Int
+  user_book User_Book[]
 
-  @@map("books")
+  @@map("book")
 }
 
-//Relation between User and book
+//User and Book relation
 model User_Book {
-  user   User    @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id])
   userId Int //relation scalar field
-  book   Book    @relation(fields: [bookId], references: [id])
+  book Book @relation(fields: [bookId], references: [id])
   bookId Int
-  status Status  @default(INSHELF)
+  progress Int
+  status Status @default(INSHELF)
   review String?
 
-  @@id([userId, bookId])
+ @@id([userId,bookId])
 }
 
+
+// Enum type for status value
 enum Status {
   READ
   READING

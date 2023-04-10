@@ -36,6 +36,10 @@ class User {
 
     return res.status(200).json(signup);
   }
+
+  async newBook(req, res) {
+    const { userId, bookId } = req.body;
+  }
 }
 
 export default new User();

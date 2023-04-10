@@ -3,7 +3,7 @@
 
   - You are about to drop the `User_Book` table. If the table is not empty, all the data it contains will be lost.
   - You are about to drop the `book` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `user` table. If the table is not empty, all the data it contains will be lost.
+  - You are about to drop the `use  r` table. If the table is not empty, all the data it contains will be lost.
 
 */
 -- DropForeignKey

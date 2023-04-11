@@ -27,7 +27,7 @@ class Book {
     const newBook = await prisma.book.create({
       data: {
         name,
-        email,
+        author,
         pages,
       },
     });

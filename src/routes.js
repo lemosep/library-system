@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { PrismaClient } from "@prisma/client";
+import userMiddleware from "./middlewares/userMiddlewares.js";
 
 const routes = new Router();
 const prisma = new PrismaClient();
@@ -15,8 +16,8 @@ import book from "./app/controllers/Book.js";
 //User
 routes.get("/users", user.index);
 routes.get("/users/:id", user.search);
-routes.post("/users", user.create);
-routes.post("users/:id/books/:id/new", user.newBook);
+routes.post("/signup", user.create);
+routes.post("/users/books/new", user.newBook);
 
 //Book
 routes.get("/books", book.index);

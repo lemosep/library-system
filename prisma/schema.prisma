@@ -13,7 +13,8 @@ datasource db {
 //User Model
 model User {
   id Int @id @default(autoincrement())
-  name String
+  name String @db.VarChar(130)
+  password String
   email String @unique
   user_book ReadLog[]
 
@@ -45,6 +46,8 @@ model ReadLog {
 
  @@map("read_logs")
 }
+
+
 
 
 // Enum type for status value

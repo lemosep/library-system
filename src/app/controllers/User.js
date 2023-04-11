@@ -23,7 +23,7 @@ class User {
 
   //Create new user
   async create(req, res) {
-    const { name, email } = req.body;
+    const { name, email, password } = req.body;
 
     // User is new to application, so there's no need to pass books as a parameter
 
@@ -31,14 +31,50 @@ class User {
       data: {
         name,
         email,
+        password,
       },
     });
 
     return res.status(200).json(signup);
   }
 
+  // Create new Readlog
   async newBook(req, res) {
     const { userId, bookId } = req.body;
+
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+    });
+
+    const book = await prisma.book.findUnique({
+      where: { id: bookId },
+    });
+
+    if (!user) {
+      return res
+        .status(404)
+        .json({ error: "Could not find user by passed ID" });
+    }
+
+    if (!book) {
+      return res
+        .status(404)
+        .json({ error: "Could not find book by passed ID" });
+    }
+
+    console.log(book);
+    console.log(user);
+
+    const addToShelf = await prisma.readLog.create({
+      data: {
+        status: "INSHELF",
+        progress: 0,
+        userId: user.id,
+        bookId: book.id,
+      },
+    });
+
+    return res.json(addToShelf);
   }
 }
 

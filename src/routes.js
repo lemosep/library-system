@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { PrismaClient } from "@prisma/client";
-import userMiddleware from "./middlewares/userMiddlewares.js";
+import validateSignup from "./app/middlewares/validateSignup.js";
 
 const routes = new Router();
 const prisma = new PrismaClient();
@@ -16,7 +16,8 @@ import book from "./app/controllers/Book.js";
 //User
 routes.get("/users", user.index);
 routes.get("/users/:id", user.search);
-routes.post("/signup", user.create);
+routes.get("/login"); /** Add middlewares and   */
+routes.post("/signup", validateSignup, user.create);
 routes.post("/users/books/new", user.newBook);
 
 //Book

@@ -1,5 +1,9 @@
 import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcrypt";
 const prisma = new PrismaClient();
+
+//Salt value
+const saltRounds = 10;
 
 class User {
   // Get all users
@@ -25,13 +29,18 @@ class User {
   async create(req, res) {
     const { name, email, password } = req.body;
 
+    //Hash password
+    const hash = await bcrypt.hash(password, saltRounds);
+
+    console.log(hash);
+
     // User is new to application, so there's no need to pass books as a parameter
 
     const signup = await prisma.user.create({
       data: {
         name,
         email,
-        password,
+        password: hash,
       },
     });
 

@@ -32,8 +32,6 @@ class User {
     //Hash password
     const hash = await bcrypt.hash(password, saltRounds);
 
-    console.log(hash);
-
     // User is new to application, so there's no need to pass books as a parameter
 
     const signup = await prisma.user.create({

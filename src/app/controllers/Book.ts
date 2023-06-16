@@ -1,14 +1,16 @@
+import { Request, Response, NextFunction } from "express";
 import { PrismaClient } from "@prisma/client";
+
 const prisma = new PrismaClient();
 
-class Book {
+export class Book {
   // Get all books
-  async index(req, res) {
-    const books = await prisma.book.findMany;
+  async index(req: Request, res: Response) {
+    const books = await prisma.book.findMany();
     return res.json(books);
   }
   // Get specific book
-  async search(req, res) {
+  async search(req: Request, res: Response) {
     const id = parseInt(req.params.id);
 
     const book = await prisma.book.findUnique({
@@ -21,7 +23,7 @@ class Book {
   }
 
   //Add new Book
-  async add(req, res) {
+  async add(req: Request, res: Response) {
     const { name, author, pages } = req.body;
 
     const newBook = await prisma.book.create({
@@ -35,5 +37,3 @@ class Book {
     return res.status(200).json(newBook);
   }
 }
-
-export default new Book();

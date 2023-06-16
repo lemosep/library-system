@@ -1,3 +1,4 @@
+import { Request, Response, NextFunction } from "express";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 const prisma = new PrismaClient();
@@ -5,15 +6,15 @@ const prisma = new PrismaClient();
 //Salt value
 const saltRounds = 10;
 
-class User {
+export class User {
   // Get all users
-  async index(req, res) {
+  async index(req: Request, res: Response) {
     const users = await prisma.user.findMany();
     return res.json(users);
   }
 
   // Search a single user
-  async search(req, res) {
+  async search(req: Request, res: Response) {
     const id = parseInt(req.params.id);
 
     const user = await prisma.user.findUnique({
@@ -26,7 +27,7 @@ class User {
   }
 
   //Create new user
-  async create(req, res) {
+  async create(req: Request, res: Response) {
     const { name, email, password } = req.body;
 
     //Hash password
@@ -46,7 +47,7 @@ class User {
   }
 
   // Create new Readlog
-  async newBook(req, res) {
+  async newBook(req: Request, res: Response) {
     const { userId, bookId } = req.body;
 
     const user = await prisma.user.findUnique({
@@ -84,5 +85,3 @@ class User {
     return res.json(addToShelf);
   }
 }
-
-export default new User();

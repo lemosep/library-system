@@ -8,8 +8,12 @@ const prisma = new PrismaClient();
 //Controllers
 import { User } from "./app/controllers/User";
 import { Book } from "./app/controllers/Book";
+import { todo } from "node:test";
 
 //Controllers???
+
+// Default pages - (homepage, about, etc...)
+// @@TODO - search for html rendering in Typescript
 
 //user, book and user_book
 

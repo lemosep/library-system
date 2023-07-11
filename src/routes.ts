@@ -13,20 +13,22 @@ import { todo } from "node:test";
 //Controllers???
 
 // Default pages - (homepage, about, etc...)
+
 // @@TODO - search for html rendering in Typescript
 
 //user, book and user_book
 
 //User
-const user = new User();
+const user: User = new User();
 routes.get("/users", user.index);
-routes.get("/users/:id", user.search);
-routes.get("/login"); /** @todo Add middlewares and   */
+routes.get("/user/:id", user.search);
+routes.get("/login"); /** @todo Add middlewares and search about token */
 routes.post("/signup", validateSignup, user.create);
 routes.post("/users/books/new", user.newBook);
 
 //Book
-const book = new Book();
+const book: Book = new Book();
 routes.get("/books", book.index);
-routes.get("books/:id", book.search);
-routes.post("/books", book.add);
+routes.get("/book/:name", book.searchBook);
+routes.post("/books", book.create);
+routes.put("/books", book.updateBook);

@@ -28,7 +28,7 @@ export class User {
 
   //Create new user
   async create(req: Request, res: Response) {
-    const { name, email, password } = req.body;
+    const { username, name, email, isAdmin, password } = req.body;
 
     //Hash password
     const hash = await bcrypt.hash(password, saltRounds);
@@ -37,8 +37,10 @@ export class User {
 
     const signup = await prisma.user.create({
       data: {
+        username,
         name,
         email,
+        isAdmin,
         password: hash,
       },
     });
@@ -59,19 +61,12 @@ export class User {
     });
 
     if (!user) {
-      return res
-        .status(404)
-        .json({ error: "Could not find user by passed ID" });
+      return res.status(404).json({ error: "Could not find user by given ID" });
     }
 
     if (!book) {
-      return res
-        .status(404)
-        .json({ error: "Could not find book by passed ID" });
+      return res.status(404).json({ error: "Could not find book by given ID" });
     }
-
-    console.log(book);
-    console.log(user);
 
     const addToShelf = await prisma.readLog.create({
       data: {

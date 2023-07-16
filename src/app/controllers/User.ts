@@ -40,12 +40,12 @@ export class User {
         username,
         name,
         email,
-        isAdmin,
+        isAdmin: !isAdmin ? false : true,
         password: hash,
       },
     });
 
-    return res.status(200).json(signup);
+    return res.status(200).render("singupThankYou");
   }
 
   // Create new Readlog

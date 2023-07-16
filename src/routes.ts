@@ -8,15 +8,26 @@ const prisma = new PrismaClient();
 //Controllers
 import { User } from "./app/controllers/User";
 import { Book } from "./app/controllers/Book";
+import { Sessions } from "./app/controllers/Sessions";
+import {} from "./app/controllers/Homepage";
 import { todo } from "node:test";
 
 //Controllers???
 
 // Default pages - (homepage, about, etc...)
+routes.get("/homepage", (req, res) => {
+  res.render("homepage");
+});
+
+routes.get("/signup", (req, res) => {
+  res.render("signup");
+});
 
 // @@TODO - search for html rendering in Typescript
 
-//user, book and user_book
+//Sessions
+const session: Sessions = new Sessions();
+routes.post("/sessions", session.create);
 
 //User
 const user: User = new User();

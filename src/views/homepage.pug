@@ -7,12 +7,18 @@ html(lang="en")
         title Homepage
     body 
     h1 Welcome to Edu's Library!
+    br
+    br
     button(onclick="redirectToSignup()") Signup 
     br
     br
     button(onclick="redirectToLogin()") Log in
-
     script.
          const redirectToSignup = () => {window.location.href = '/signup'}
          const redirectToLogin = () => {window.location.href = '/login'}
-
+    style.
+        body{
+            background-color: #354034;
+            text-align: center;
+        color: azure;
+        }      

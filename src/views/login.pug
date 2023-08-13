@@ -3,13 +3,28 @@ html(lang="en")
     head
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Document
+        title Login
     body 
-    h1 Welcome Back! 
-    form(action="/login")
+    h1 Welcome back! 
+    button(onclick="renderHomepage()") Homepage
+    br
+    br
+    form(action="/login" method="POST")
         label(for="email") Email: 
         input(type="text", name="email")
         br
         br
         label(for="password") Password: 
         input(type="password", name="password")
+        br
+        br
+        button(type="submit") Log in
+
+    script.
+      const renderHomepage = () => {window.location.href = "/homepage"}
+    style.
+        body{
+            background-color: #354034;
+            text-align: center;
+        color: azure;
+        }  

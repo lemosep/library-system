@@ -4,6 +4,9 @@ html
     link(rel="stylesheet", href="style.css") 
     body 
         h1 Sign Up 
+        br
+        br
+        button(onclick="renderHomepage()") Homepage
         form(action="/signup", method="POST")
             label(for="name") Name:
             input(type="text", name="name")
@@ -22,3 +25,13 @@ html
             br
             br
             button(type="submit") Sign Up
+    
+    script.
+        const renderHomepage = () => {window.location.href = "/homepage"}
+    
+    style.
+        body{
+            background-color: #354034;
+            text-align: center;
+        color: azure;
+        }  

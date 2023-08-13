@@ -3,6 +3,12 @@ html(lang="en")
     head
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Success!
+        title Signup Sucess
     body 
-    h1 all set now!
+    h1 All set now! 
+    br
+    br
+    button(onclick="renderLoggedHome()") Go to homepage
+
+    script.
+        const renderLoggedHome = () => {window.location.href = '/homepage'}

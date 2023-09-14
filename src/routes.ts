@@ -2,7 +2,7 @@ import { Router } from "express";
 import { PrismaClient } from "@prisma/client";
 
 //Middlewares
-import { verifyToken } from "./app/middlewares/verifyToken";
+import { verifySession } from "./app/middlewares/verifySession";
 import { validateSignup } from "./app/middlewares/validateSignup";
 
 export const routes = Router();
@@ -28,11 +28,11 @@ routes.get("/login", (req, res) => {
   res.render('login');
 })
 
-routes.get("/userSpace",verifyToken ,(req, res) => {
+routes.get("/userSpace",verifySession ,(req, res) => {
   res.render("userSpace")
 })
 
-routes.get("/protected", verifyToken, (req,res) => {
+routes.get("/protected", verifySession, (req,res) => {
   return res.status(200).json({msg: 'cool af bro'})
 })
 

@@ -1,13 +1,10 @@
-import { Request, Response, NextFunction } from "express";
+import { randomBytes } from "crypto";
+import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
-import jwt, { Secret } from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
 dotenv.config();
-
-const secretKey = `${process.env.SECRET_KEY}`;
-
 const prisma = new PrismaClient();
 
 export class Sessions {
@@ -15,7 +12,6 @@ export class Sessions {
     const { email, password } = req.body;
 
     try {
-
     const user = await prisma.user.findUnique({
       where: {
         email: email,
@@ -28,17 +24,22 @@ export class Sessions {
 
     if(!matchPassword) {return res.status(404).json({msg: "Email and password do not relate"})};
 
-    // If email and password are accordingly, generate session 
-    const token = jwt.sign({userId: user.id}, secretKey, {expiresIn: "1min"})
-
-   await prisma.user.update({ 
-    where: {id: user.id},
-    data: {token: token}
-   });
+   const newSession = await prisma.session.create({
+    data: {
+      sessionID: randomBytes(32).toString('hex'),
+      userId: user.id,
+      expiresIn: new Date(Date.now() + 2 * 86400000), // 2 days
+    }
+   })
    
-   req.session.token = token;
-
-   res.status(200).redirect("userSpace");
+   //create cookie
+   res.cookie("user", newSession.sessionID, {httpOnly: true});
+  
+   if(user.isAdmin) {
+    res.redirect('/adminPage');
+   } else {
+    res.redirect('/userSpace');
+   }
 
   }catch (error) {
     res.status(500).json({msg: 'Internal server error'})

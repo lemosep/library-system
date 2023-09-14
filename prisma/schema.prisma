@@ -18,7 +18,6 @@ model User {
   name String @db.VarChar(130)
   password String
   email String @unique
-  token String?
   user_book ReadLog[]
 
   @@map("users")
@@ -52,8 +51,14 @@ model ReadLog {
  @@map("read_logs")
 }
 
+model Session {
+  sessionID String
+  userId Int
+  expiresIn DateTime
 
-
+  @@id([sessionID])
+  @@map("sessions")
+}
 
 // Enum type for status value
 enum Status {

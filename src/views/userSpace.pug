@@ -5,8 +5,23 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Reader Space
     body
-    
-
-
-
-    
+    h1=`Hello, ${name}!`
+    br
+    br
+    form(action="/logout" method="POST") 
+        button(type="submit") Log out
+    br
+    br
+    button(onclick="redirectMyLibrary") My Library
+    br
+    br
+    button(onclick="redirectSettings") Settings
+    script.
+        const redirectMyLibrary = () => {window.location.href = '/userLibrary'};
+        const redirectSettings = () => {window.location.href = '/settings'};
+    style.
+        body{
+            background-color: #354034;
+            text-align: center;
+            color: azure;
+        }     

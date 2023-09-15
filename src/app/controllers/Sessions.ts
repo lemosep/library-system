@@ -8,6 +8,7 @@ dotenv.config();
 const prisma = new PrismaClient();
 
 export class Sessions {
+
   async create(req: Request, res: Response) {
     const { email, password } = req.body;
 
@@ -24,6 +25,8 @@ export class Sessions {
 
     if(!matchPassword) {return res.status(404).json({msg: "Email and password do not relate"})};
 
+    const sessionid = await randomBytes(32).toString('hex');
+
    const newSession = await prisma.session.create({
     data: {
       sessionID: randomBytes(32).toString('hex'),
@@ -33,16 +36,34 @@ export class Sessions {
    })
    
    //create cookie
-   res.cookie("user", newSession.sessionID, {httpOnly: true});
+   res.cookie("user", newSession.sessionID, {httpOnly: true, expires: new Date(Date.now() + 2 * 86400000)});
   
    if(user.isAdmin) {
-    res.redirect('/adminPage');
+    res.render('adminPage');
    } else {
-    res.redirect('/userSpace');
+    res.render('userSpace', {name: user.name});
    }
 
   }catch (error) {
     res.status(500).json({msg: 'Internal server error'})
   }
+  }
+
+  async delete(req:Request, res: Response) {
+
+    const parsedCurrentCookie = req.headers.cookie?.replace("user=","");
+
+    if (!parsedCurrentCookie) { return res.status(409).json({msg: "Session does not exist"}) };
+
+    res.clearCookie('user');
+
+    await prisma.session.delete({
+      where: {
+        sessionID: parsedCurrentCookie,
+      }
+    }) ; 
+
+    res.render('homepage')
+
   }
 }

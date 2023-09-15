@@ -14,5 +14,5 @@ app.set("views", "./src/views");
 app.use(express.json());
 app.use(express.urlencoded());
 
-app.use(verifySession)
+app.use('/userSpace',verifySession)
 app.use(routes);

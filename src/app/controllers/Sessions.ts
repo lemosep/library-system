@@ -25,23 +25,21 @@ export class Sessions {
 
     if(!matchPassword) {return res.status(404).json({msg: "Email and password do not relate"})};
 
-    const sessionid = await randomBytes(32).toString('hex');
-
    const newSession = await prisma.session.create({
     data: {
-      sessionID: randomBytes(32).toString('hex'),
+      sessionID: randomBytes(32).toString('hex'), 
       userId: user.id,
       expiresIn: new Date(Date.now() + 2 * 86400000), // 2 days
     }
    })
-   
+    
    //create cookie
    res.cookie("user", newSession.sessionID, {httpOnly: true, expires: new Date(Date.now() + 2 * 86400000)});
   
    if(user.isAdmin) {
     res.render('adminPage');
    } else {
-    res.render('userSpace', {name: user.name});
+    return res.render('userSpace', {user});
    }
 
   }catch (error) {

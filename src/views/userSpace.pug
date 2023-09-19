@@ -5,7 +5,7 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Reader Space
     body
-    h1=`Hello, ${name}!`
+    h1=`Hello, ${user.name}!`
     br
     br
     form(action="/logout" method="POST") 
@@ -15,7 +15,7 @@ html(lang="en")
     button(onclick="redirectMyLibrary") My Library
     br
     br
-    button(onclick="redirectSettings") Settings
+    button(onclick="redirectSettings()") Settings
     script.
         const redirectMyLibrary = () => {window.location.href = '/userLibrary'};
         const redirectSettings = () => {window.location.href = '/settings'};

@@ -1,10 +1,10 @@
 import express from "express";
-import dotenv from 'dotenv';
+import { PrismaClient } from "@prisma/client";
 
 import { verifySession } from "./app/middlewares/verifySession";
 import { routes } from "./routes";
 
-dotenv.config();
+const prisma = new PrismaClient();
 
 export const app = express();
 
@@ -15,4 +15,5 @@ app.use(express.json());
 app.use(express.urlencoded());
 
 app.use('/userSpace',verifySession)
+
 app.use(routes);

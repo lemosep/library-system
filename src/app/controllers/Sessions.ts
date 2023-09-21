@@ -37,9 +37,9 @@ export class Sessions {
    res.cookie("user", newSession.sessionID, {httpOnly: true, expires: new Date(Date.now() + 2 * 86400000)});
   
    if(user.isAdmin) {
-    res.render('adminPage');
+    res.redirect('adminPage');
    } else {
-    return res.render('userSpace', {user});
+    return res.redirect('userSpace');
    }
 
   }catch (error) {

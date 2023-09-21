@@ -3,7 +3,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export const verifySession =async (req:Request, res:Response, next:NextFunction) => {
+export const verifySession = async (req:Request, res:Response, next:NextFunction) => {
     
     const parsedCookieValue = req.headers.cookie?.replace('user=','');
 
@@ -13,12 +13,21 @@ export const verifySession =async (req:Request, res:Response, next:NextFunction)
 
     const session = await prisma.session.findFirst({
         where: {
-            sessionID: parsedCookieValue
+            sessionID: parsedCookieValue,
         }
-    })
+    });
 
-    if(session) {
+    if (session) {
+        // Add user to res.locals
+        const user = await prisma.user.findFirst({
+            where: {
+                id: session.userId,
+            }
+        });
+
+        res.locals.user = user;
         next();
+        
     } else {
         res.render('error', {value: 401, stringErr: "Unauthorized"})
     }

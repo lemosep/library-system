@@ -9,4 +9,4 @@ It might take a while to finish, but stay tuned!
 
 
 # Application
-I've decided to make this project a server-side rendering application, thus I used [Pug](https://pugjs.org/api/getting-started.html) view-engine to render pages. About security I've chosen to the traditional way with cookies ([here's why](https://gist.github.com/EduLemos0/b93d3ea7cb2f773be0d630a7c6f1db0b)) being sent to the browser and a JWT token being store both the server and the cookie. Authentication was a new thing to me, so learning it was hard whilst fun.
+I've decided to make this project a server-side rendering application, thus I used [Pug](https://pugjs.org/api/getting-started.html) view-engine to render pages. About security I've chosen to the traditional way with cookies ([here's why](https://gist.github.com/lemosep/b93d3ea7cb2f773be0d630a7c6f1db0b)) being sent to the browser and a JWT token being store both the server and the cookie. Authentication was a new thing to me, so learning it was hard whilst fun.

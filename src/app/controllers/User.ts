@@ -61,7 +61,7 @@ export class User {
       },
     });
 
-    return res.status(200).render("singupThankYou");
+    return res.redirect("singupThankYou");
   }
 
   // Create new Readlog

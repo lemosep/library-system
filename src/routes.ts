@@ -29,6 +29,12 @@ routes.get("/userSpace", (req, res) => {
   res.render("userSpace")
 })
 
+routes.get("/userSpace/settings", (req, res) => {
+  res.render("settings");
+})
+
+routes.get("/userSpace/settings/changeUsername")
+
 //Sessions
 const session: Sessions = new Sessions();
 routes.post("/login",session.create);

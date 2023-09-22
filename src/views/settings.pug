@@ -5,4 +5,25 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Settings
     body 
-    h1 Settings
+        h1 Settings
+        br
+        br
+        button(onclick="loadUsernameChange") Change username
+        br
+        br
+        button(onclick="loadPasswordChange") Change Password 
+    
+    script.
+        const loadUsernameChange = () => {window.location.href = "/userSpace/changeUsername"}
+        const loadPasswordCHange = () => {window.location.href = "/userSpace/changePassword"}
+
+
+    style.
+        body{
+            font-family: "Courier New", monospace;
+            background-color: #354034;
+            text-align: center;
+            color: azure;
+        }  
+
+    

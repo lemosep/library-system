@@ -1,10 +1,7 @@
 import express from "express";
-import { PrismaClient } from "@prisma/client";
 
 import { verifySession } from "./app/middlewares/verifySession";
 import { routes } from "./routes";
-
-const prisma = new PrismaClient();
 
 export const app = express();
 

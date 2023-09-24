@@ -1,7 +1,6 @@
 import { Router } from "express";
-
-//Middlewares
-import { validateSignup } from "./app/middlewares/validateSignup";
+import { z } from 'zod';
+import { validateRequest } from "zod-express-middleware";
 
 export const routes = Router();
 
@@ -44,7 +43,15 @@ routes.post("/logout", session.delete);
 const user: User = new User();
 routes.get("/users", user.index);
 routes.get("/user/:id", user.search);
-routes.post("/signup", validateSignup, user.create);
+
+routes.post("/signup", validateRequest({
+  body: z.object({
+    name: z.string().min(3),
+    email: z.string().email(),
+    password: z.string().min(6),
+  })
+}), user.create);
+
 routes.post("/users/books/new", user.newBook);
 
 //Book

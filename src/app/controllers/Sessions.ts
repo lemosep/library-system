@@ -1,11 +1,8 @@
 import { randomBytes } from "crypto";
 import { Request, Response } from "express";
-import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
-import dotenv from 'dotenv';
 
-dotenv.config();
-const prisma = new PrismaClient();
+import { prisma } from "../../app";
 
 export class Sessions {
 

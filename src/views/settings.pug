@@ -4,14 +4,17 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Settings
-    body 
-        h1 Settings
+    body    
+        div(class="top")
+            h1 Settings
+            button(onclick="") Back
+
         br
         br
-        button(onclick="loadUsernameChange") Change username
+        button(onclick="loadUsernameChange()") Change username
         br
         br
-        button(onclick="loadPasswordChange") Change Password 
+        button(onclick="loadPasswordChange()") Change Password 
     
     script.
         const loadUsernameChange = () => {window.location.href = "/userSpace/changeUsername"}
@@ -25,5 +28,9 @@ html(lang="en")
             text-align: center;
             color: azure;
         }  
+        .top{
+
+        }
+
 
     

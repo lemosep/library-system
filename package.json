@@ -29,7 +29,9 @@
     "jsonwebtoken": "^9.0.1",
     "nodemon": "^2.0.22",
     "prisma": "^4.11.0",
-    "pug": "^3.0.2"
+    "pug": "^3.0.2",
+    "zod": "^3.22.2",
+    "zod-express-middleware": "^1.4.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",

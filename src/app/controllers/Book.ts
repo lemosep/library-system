@@ -1,8 +1,6 @@
-import { Request, Response, NextFunction } from "express";
-import { PrismaClient } from "@prisma/client";
-import { stringify } from "querystring";
+import { Request, Response } from "express";
 
-const prisma = new PrismaClient();
+import { prisma } from "../../app";
 
 export class Book {
   // Get all books

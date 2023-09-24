@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
-const prisma = new PrismaClient();
+
+import { prisma } from "../../app";
 
 //Salt value
 const saltRounds = 10;
